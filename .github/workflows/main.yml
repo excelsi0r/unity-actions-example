@@ -158,3 +158,19 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build
+  
+  deploy:
+    needs: buildForMac
+    name: Deploy Server
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Deploying new server updates"
+
+  release:
+    needs: deploy
+    name: Release to Steam
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Releasing to steam"
